@@ -1,0 +1,6 @@
+.bg-info {
+	background: linear-gradient(#222 5%, rgba(33, 37, 41, 0.6), #222),
+		url("./../../../assets/img/gioco_2.png");
+	background-size: cover;
+	background-position: center;
+}

@@ -1,0 +1,86 @@
+/**electrolize*/
+@import url("https://fonts.googleapis.com/css2?family=Electrolize&display=swap");
+/**Fira-Code */
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap");
+* {
+	font-family: "Electrolize", sans-serif;
+}
+body {
+	background: #222;
+	color: white;
+}
+.text-main {
+	color: cyan;
+}
+
+.bg-main {
+	background: cyan;
+}
+.font-fira {
+	font-family: "Fira Code", monospace;
+}
+
+/* Sign */
+
+.Sign-form {
+	position: relative;
+	padding: 30px;
+	backdrop-filter: blur(10px);
+}
+
+.Sign-top {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+}
+
+.Sign-top::before {
+	position: absolute;
+	content: "";
+	top: 0;
+	left: 0;
+	height: 20px;
+	width: 20px;
+	border-top: 1px solid cyan;
+	border-left: 1px solid cyan;
+}
+.Sign-top::after {
+	position: absolute;
+	content: "";
+	top: 0;
+	right: 0;
+	height: 20px;
+	width: 20px;
+	border-top: 1px solid cyan;
+	border-right: 1px solid cyan;
+}
+.Sign-bottom {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+}
+
+.Sign-bottom::before {
+	position: absolute;
+	content: "";
+	bottom: 0;
+	left: 0;
+	height: 20px;
+	width: 20px;
+	border-bottom: 1px solid cyan;
+	border-left: 1px solid cyan;
+}
+.Sign-bottom::after {
+	position: absolute;
+	content: "";
+	bottom: 0;
+	right: 0;
+	height: 20px;
+	width: 20px;
+	border-bottom: 1px solid cyan;
+	border-right: 1px solid cyan;
+}

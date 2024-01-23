@@ -1,0 +1,14 @@
+{
+	"name": "reactlaravel",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"frontend": "cd frontend  && npm run dev",
+		"backend": "cd backend  && php artisan serve",
+		"migrate": "cd backend && php artisan migrate",
+		"fresh": "cd backend && php artisan migrate:fresh && php artisan passport:install --force "
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
