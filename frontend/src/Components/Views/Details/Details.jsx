@@ -3,18 +3,21 @@ import { Link, useParams } from "react-router-dom"
 import { ConfigContext } from "../../../Context/Config/Index";
 import { AutContext } from "../../../Context/Auth";
 
+import classes from './Details.module.css';
+import Message from "../../UI/Message/Message";
+
 export default function Details() {
     const { slug } = useParams();
     const [detail, setDetail] = useState(null);
     const { api_urls, api_secrets } = useContext(ConfigContext);
     const { user } = useContext(AutContext);
-
+    const [message, setMessage] = useState("")
     useEffect(() => {
         fetch(`${api_urls.games}games/${slug}?&key=${api_secrets.games}`)
             .then((r) => r.json())
             .then((r) => setDetail(() => r));
     }, []);
-    console.log(detail);
+    // console.log(detail);
     return (
         <>
             {
@@ -24,6 +27,8 @@ export default function Details() {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
+                    backgroundAttachment: "fixed"
+
                 }}>
                     <div className="container">
                         <div className="row mt-5">
@@ -94,26 +99,42 @@ export default function Details() {
 
                                 </div>
                             </div>
-                            {/* Streamers */}
-                            <div className="col-12 col-md-3">
-                                <h2>Streamers</h2>
-                                <p>giocatore_1</p>
-                                <p>giocatore_2</p>
-                                <p>giocatore_3</p>
-                                <p>giocatore_4</p>
-                            </div>
-                            <div className="col-12 col-md-3">
-                                {
-                                    user ? (
-                                        <Link to={`/stream/${detail.slug}/${detail.id}`} className="h4 text-main text-decoration-none fst-italic">
-                                            <h2>Start your Stream <i className="fa-solid fa-chevron-right me-2"></i> </h2>
-                                        </Link>
-                                    ) : ("you must be logged to stream.")
-                                }
-
+                            {/* comment */}
+                            <div className="col-12 col-md-6">
+                                <h2>Comments</h2>
+                                <div className="container-fluid ">
+                                    <div className={"row overflow-auto my-5 " + classes.comment}>
+                                        <Message />
+                                    </div>
+                                    <form action="">
+                                        <div className="col-12">
+                                            <textarea name="description"
+                                                id="description"
+                                                className="form-control "
+                                                rows="5"
+                                                maxLength="100"
+                                                placeholder="comment..."
+                                                onChange={(e) => {
+                                                    setMessage(e.target.value);
+                                                }}
+                                            />
+                                            <p>{message.length} / 100</p>
+                                        </div>
+                                        <div className="mt-2 d-flex justify-content-end ">
+                                            <button type="submit" className='btn btn-info  rounded'>send!</button>
+                                        </div>
+                                        {/* {user ? (
+                                                <div className="mt-2">
+                                                    <button type="submit" className='btn btn-info  rounded'>send!</button>
+                                                </div>
+                                            ) : (
+                                                <p>per commentare iscriviti! </p>
+                                            )} */}
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div >
                 </div >
             }
         </>

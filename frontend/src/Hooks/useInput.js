@@ -6,9 +6,13 @@ const useInput = (initalValue) => {
 	const handleChange = (event) => {
 		setValue(event.target.value);
 	};
+	const count = (event) => {
+		return event.length;
+	};
 
 	return {
 		value,
+		count: count,
 		onChange: handleChange,
 	};
 };

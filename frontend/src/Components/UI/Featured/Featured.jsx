@@ -15,7 +15,7 @@ export default function Featured() {
             .then((r) => setData(() => r.results.slice(0, 4)));
     }, []);
 
-    console.log(data);
+    // console.log(data);
 
     return (
         <div className="container-fluid">

@@ -5,7 +5,7 @@ import { ConfigProvider } from "../../../Context/Config/Index";
 
 
 import AuthProvider from "../../../Context/Auth";
-import StreamingProvider from "../../../Context/Streaming";
+
 
 
 export default function Root() {
@@ -13,13 +13,13 @@ export default function Root() {
     <>
       <ConfigProvider>
         <AuthProvider>
-          <StreamingProvider>
 
-            <Navbar />
-            <Outlet />
-            <Footer />
 
-          </StreamingProvider>
+          <Navbar />
+          <Outlet />
+          <Footer />
+
+
         </AuthProvider>
       </ConfigProvider>
     </>

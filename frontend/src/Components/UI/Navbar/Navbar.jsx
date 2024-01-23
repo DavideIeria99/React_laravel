@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import classes from './Navbar.module.css'
 import { AutContext } from '../../../Context/Auth'
-import { StreamingContext } from '../../../Context/Streaming'
+
 import { useContext, useState } from 'react'
 import Modal from '../Modal/Modal';
 export default function Navbar() {
 
     const { user, logout } = useContext(AutContext);
-    const { isStreaming } = useContext(StreamingContext);
+
     const [modal, setModal] = useState(false);
 
     const closeModal = () => setModal(false);
@@ -43,7 +43,7 @@ export default function Navbar() {
                                         <Link to="/profile" className='nav-link text-white'>
                                             <i className="fa-regular fa-circle-user me-2"></i>
                                             {user.username}
-                                            {isStreaming && <i className='fa-solid fa-circle text-danger mx-1'></i>}
+
                                         </Link>
                                     </li>
 
