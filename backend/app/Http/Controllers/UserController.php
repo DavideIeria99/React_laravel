@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Twilio\Rest\Serverless\V1\Service\FunctionInstance;
+
 
 class UserController extends Controller
 {
@@ -145,5 +146,45 @@ class UserController extends Controller
     public function countUsers()
     {
         return User::count();
+    }
+
+    public function commentSend(Request $request)
+    {
+
+        $comment = Comment::create([
+            'user_id' => $request->user_id,
+            'message' => $request->message,
+            'game' => $request->game,
+
+        ]);
+        if (!$comment) {
+            $responseMessage = "no comment is";
+
+            return response()->json([
+                'data' => null,
+                'success' => false,
+                'message' => $responseMessage
+            ], 403);
+        }
+        $responseMessage = "user comment success";
+
+        return response()->json([
+            'data' => $comment,
+            'success' => true,
+            'message' => $responseMessage
+        ], 200);
+    }
+
+    public function commentUsers()
+    {
+        $comment = Comment::all();
+
+        $responseMessage = "comment profile";
+
+        return response()->json([
+            'success' => true,
+            'message' => $responseMessage,
+            'data' => $comment,
+        ], 200);
     }
 }
