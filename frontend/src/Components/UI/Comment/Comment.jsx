@@ -1,16 +1,33 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AutContext } from "../../../Context/Auth";
 import { ConfigContext } from "../../../Context/Config/Index";
 import Message from "../Message/Message";
 
 
 
+
 export default function Comment({ slug }) {
     const { user } = useContext(AutContext);
     const { api_urls } = useContext(ConfigContext);
+    const [comment, setComment] = useState("");
     const [message, setMessage] = useState("");
-    const [count, setCount] = useState(false);
 
+
+    useEffect(() => {
+        fetchComment();
+    })
+
+    const fetchComment = async () => {
+        await fetch(`${api_urls.backend}/api/users/comment`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((r) => r.json())
+            .then((r) => {
+                setMessage(r.data.filter((comment) => comment.game == slug))
+
+            })
+    }
 
     const sendComment = async (event) => {
         event.preventDefault();
@@ -18,21 +35,23 @@ export default function Comment({ slug }) {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                user_id: user.id,
+                user: user.username,
                 game: slug,
-                message: message
+                message: comment
             })
         })
-            .then((r) => r.json())
             .then((r) => {
-                setMessage("");
-                setCount(true);
-                console.log("successo", count)
+                r.json();
+                setComment("");
+                fetchComment();
+
             })
     };
+
+
     return (
         <>
-            <Message slug={slug} />
+            <Message message={message} />
             {user ?
                 <form onSubmit={sendComment}>
                     <div className="col-12">
@@ -42,12 +61,12 @@ export default function Comment({ slug }) {
                             rows="5"
                             maxLength="100"
                             placeholder="comment..."
-                            value={message}
+                            value={comment}
                             onChange={(e) => {
-                                setMessage(e.target.value);
+                                setComment(e.target.value);
                             }}
                         />
-                        <p>{message.length} / 100</p>
+                        <p>{comment.length} / 100</p>
                     </div>
                     <div className="mt-2 d-flex justify-content-end ">
                         <button type="submit" className='btn btn-info  rounded'>send!</button>

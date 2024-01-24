@@ -1,27 +1,10 @@
 
-import { useContext, useEffect, useState } from 'react'
+
 import classes from './Message.module.css'
-import { ConfigContext } from '../../../Context/Config/Index';
 
 
-export default function Message({ slug }) {
-    const { api_urls } = useContext(ConfigContext);
-    const [message, setMessage] = useState("");
 
-
-    useEffect(() => {
-        fetch(`${api_urls.backend}/api/users/comment`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-        })
-            .then((r) => r.json())
-            .then((r) => {
-                setMessage(r.data.filter((comment) => comment.game == slug))
-
-            })
-    }, [message])
-
-
+export default function Message({ message }) {
     console.log(message);
     return (
         <>
@@ -37,7 +20,7 @@ export default function Message({ slug }) {
                                             <div className="col-3">
                                                 <div className={"d-flex justify-content-between  " + classes.img}>
                                                     <img src="https://picsum.photos/200" className="img-fluid" alt="test" />
-                                                    <p className="fs-5 align-bottom">{text.user_name}</p>
+                                                    <p className="fs-5 align-bottom">{text.user}</p>
                                                 </div>
                                             </div>
                                             {/* messaggio */}
@@ -56,8 +39,5 @@ export default function Message({ slug }) {
                 )
             }
         </>
-
-
-
     )
 }

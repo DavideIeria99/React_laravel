@@ -152,7 +152,7 @@ class UserController extends Controller
     {
 
         $comment = Comment::create([
-            'user_id' => $request->user_id,
+            'user' => $request->user,
             'message' => $request->message,
             'game' => $request->game,
 
