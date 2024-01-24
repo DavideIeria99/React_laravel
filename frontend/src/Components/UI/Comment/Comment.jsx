@@ -6,6 +6,7 @@ import Message from "../Message/Message";
 
 
 
+
 export default function Comment({ slug }) {
     const { user } = useContext(AutContext);
     const { api_urls } = useContext(ConfigContext);
@@ -15,7 +16,7 @@ export default function Comment({ slug }) {
 
     useEffect(() => {
         fetchComment();
-    })
+    }, [])
 
     const fetchComment = async () => {
         await fetch(`${api_urls.backend}/api/users/comment`, {
@@ -36,6 +37,7 @@ export default function Comment({ slug }) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 user: user.username,
+                user_id: user.id,
                 game: slug,
                 message: comment
             })
@@ -48,10 +50,21 @@ export default function Comment({ slug }) {
             })
     };
 
-
     return (
         <>
-            <Message message={message} />
+            {
+                message.length >= 1 ? (
+                    <div className="row overflow-auto w-100  " >
+                        {
+                            message && message.map((text) => (
+                                <Message key={text.id} message={text} />
+                            ))
+                        }
+                    </div>
+                ) : (
+                    <p>sii il primo a commentare!!</p>
+                )
+            }
             {user ?
                 <form onSubmit={sendComment}>
                     <div className="col-12">

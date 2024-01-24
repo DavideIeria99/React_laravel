@@ -148,11 +148,14 @@ class UserController extends Controller
         return User::count();
     }
 
+
+    //funzione per inviare i commenti
     public function commentSend(Request $request)
     {
 
         $comment = Comment::create([
             'user' => $request->user,
+            'user_id' => $request->user_id,
             'message' => $request->message,
             'game' => $request->game,
 
@@ -175,6 +178,7 @@ class UserController extends Controller
         ], 200);
     }
 
+    //funzione per mandare i commenti
     public function commentUsers()
     {
         $comment = Comment::all();
