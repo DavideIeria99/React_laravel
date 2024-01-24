@@ -3,6 +3,7 @@ import { ConfigContext } from "../../../Context/Config/Index";
 import Card from "../Card/Card";
 
 
+
 export default function Featured() {
     const [data, setData] = useState(null);
     const { api_urls, api_secrets } = useContext(ConfigContext);
@@ -10,9 +11,11 @@ export default function Featured() {
 
 
     useEffect(() => {
-        fetch(`${api_urls.games}games?dates=2022-01-01,2022-12-31&ordering=-added&key=${api_secrets.games}`)
+        fetch(`${api_urls.games}games?dates=2023-01-01,2023-12-31&ordering=-added&key=${api_secrets.games}`)
             .then((r) => r.json())
-            .then((r) => setData(() => r.results.slice(0, 4)));
+            .then((r) => {
+                setData(() => r.results.slice(0, 4));
+            });
     }, []);
 
     // console.log(data);
