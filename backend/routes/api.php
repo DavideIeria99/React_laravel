@@ -30,4 +30,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'CORS'], function ($router) {
     //privata
     Route::post('/view-profile', [UserController::class, 'viewProfile'])->name('profile.user');
     Route::get('/logout', [PublicController::class, 'logout'])->name('logout.user');
+
+    //CRUD
+    Route::put('/updateProfile', [UserController::class, 'updateProfile'])->name('update.profile');
 });

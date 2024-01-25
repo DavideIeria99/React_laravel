@@ -69,4 +69,34 @@ class UserController extends Controller
             'message' => $responseMessage
         ], 200);
     }
+
+    public function updateProfile(Request $request, User $user)
+    {
+        $user = Auth::guard('api')->user(); //devo essere autenticato
+
+        if (!$user) {
+            $responseMessage = "Invalid Bearer Token";
+
+            return response()->json([
+                "sussess" => false,
+                "message" => $responseMessage,
+                "error" => $responseMessage
+            ], 403); //Forbidden
+        }
+
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
+
+        $responseMessage = "profile update";
+
+        return response()->json([
+            'success' => true,
+            'message' => $responseMessage,
+            'data' => $user
+        ], 200);
+    }
 }

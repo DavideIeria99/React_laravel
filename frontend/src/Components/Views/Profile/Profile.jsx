@@ -57,6 +57,9 @@ export default function Profile() {
                                 <h1>nome:<span className="fs-4 ms-5 text-white">{profile.name}</span></h1>
                                 <h2>email<span className="fs-4 ms-5 text-white">{profile.email}</span></h2>
                                 <h2>N°commenti:<span className="fs-4 ms-5 text-white">{comment.length}</span></h2>
+                                <Link className="btn btn-info" to='/updateProfile'>
+                                    modifica
+                                </Link>
                             </div>
 
                         </div>

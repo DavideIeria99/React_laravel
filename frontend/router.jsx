@@ -7,6 +7,7 @@ import Search from "./src/Components/Views/Search/Search";
 import Sign from "./src/Components/Views/Sign/Sign";
 import Profile from "./src/Components/Views/Profile/Profile";
 import ProtectedRoute from "./src/Components/Utilities/ProtectedRoute";
+import Update from "./src/Components/Views/Update/Update";
 
 
 
@@ -44,7 +45,11 @@ export const router = createBrowserRouter([
           {
             path: "/profile",
             element: <Profile />
-          }
+          },
+          {
+            path: "/updateProfile",
+            element: <Update />
+          },
         ]
       },
     ]

@@ -8,10 +8,8 @@ export const AutContext = createContext();
 export default function AuthProvider(props) {
 
     const initialUser = localStorage.getItem('user');
-    const initialComment = localStorage.getItem('comment');
     let { api_urls } = useContext(ConfigContext);
     const [user, setUser] = useState(JSON.parse(initialUser));
-    const [comment, setComment] = useState(JSON.parse(initialComment));
     const navigate = useNavigate()
 
     //prende i parametri 
@@ -26,17 +24,18 @@ export default function AuthProvider(props) {
         //li scrive nel localStorage
         localStorage.setItem('user', JSON.stringify(obj));
     };
-    const userComment = (username, message, id) => {
+    const Update = (username, token, id) => {
         const obj = {
             username: username,
-            message: message,
+            token: token,
             id: id
         }
         // li setta
-        setComment(obj);
+        setUser(obj);
         //li scrive nel localStorage
-        localStorage.setItem('comment', JSON.stringify(obj));
+        localStorage.setItem('user', JSON.stringify(obj));
     };
+
 
     const logout = () => {
         fetch(`${api_urls.backend}/api/users/logout`, {
@@ -54,6 +53,6 @@ export default function AuthProvider(props) {
 
     return (
 
-        <AutContext.Provider value={{ login, user, logout, comment, userComment }}>{props.children}</AutContext.Provider>
+        <AutContext.Provider value={{ login, user, logout, Update }}>{props.children}</AutContext.Provider>
     )
 }
