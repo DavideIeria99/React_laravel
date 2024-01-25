@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -18,15 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'users', 'middleware' => 'CORS'], function ($router) {
     //pubbliche
-    Route::post('/register', [UserController::class, 'register'])->name('register.user');
-    Route::post('/login', [UserController::class, 'login'])->name('login.user');
+    Route::post('/register', [PublicController::class, 'register'])->name('register.user');
+    Route::post('/login', [PublicController::class, 'login'])->name('login.user');
     Route::get('/count', [UserController::class, 'countUsers'])->name('count.user');
 
     //comment
     Route::post('/comment/send', [UserController::class, 'commentSend'])->name('send.user');
-    Route::get('/comment', [UserController::class, 'commentUsers'])->name('comment.user');
+    Route::get('/comment', [PublicController::class, 'commentUsers'])->name('comment.user');
 
-    //pvivata
+    //privata
     Route::post('/view-profile', [UserController::class, 'viewProfile'])->name('profile.user');
-    Route::get('/logout', [UserController::class, 'logout'])->name('logout.user');
+    Route::get('/logout', [PublicController::class, 'logout'])->name('logout.user');
 });
