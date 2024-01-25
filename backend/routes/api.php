@@ -21,6 +21,8 @@ Route::group(['prefix' => 'users', 'middleware' => 'CORS'], function ($router) {
     Route::post('/register', [UserController::class, 'register'])->name('register.user');
     Route::post('/login', [UserController::class, 'login'])->name('login.user');
     Route::get('/count', [UserController::class, 'countUsers'])->name('count.user');
+
+    //comment
     Route::post('/comment/send', [UserController::class, 'commentSend'])->name('send.user');
     Route::get('/comment', [UserController::class, 'commentUsers'])->name('comment.user');
 

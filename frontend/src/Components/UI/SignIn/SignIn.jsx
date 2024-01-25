@@ -16,9 +16,9 @@ export default function SignIn() {
     const email = useInput("");
     const password = useInput("");
 
-    const signUp = (event) => {
+    const signUp = async (event) => {
         event.preventDefault();
-        fetch(`${api_urls.backend}/api/users/login`, {
+        await fetch(`${api_urls.backend}/api/users/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: email.value, password: password.value })
@@ -29,7 +29,6 @@ export default function SignIn() {
 
                 //una volta ricevuto il token possiamo chieedere le informazioni dello user , come name e id per esempio
                 //alla rotta wiews-profile
-
                 fetch(`${api_urls.backend}/api/users/view-profile`, {
                     method: "GET",
                     headers: {
@@ -39,7 +38,7 @@ export default function SignIn() {
                     .then((response) => response.json())
                     .then((data) => {
                         login(data.data.name, token, data.data.id);
-                        navigate("/");
+                        navigate("/view-profile");
                     });
             });
 
