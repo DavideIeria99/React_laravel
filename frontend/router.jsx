@@ -8,6 +8,7 @@ import Sign from "./src/Components/Views/Sign/Sign";
 import Profile from "./src/Components/Views/Profile/Profile";
 import ProtectedRoute from "./src/Components/Utilities/ProtectedRoute";
 import Update from "./src/Components/Views/Update/Update";
+import UpdateImage from "./src/Components/Views/UpdateImage/UpdateImage.jsx";
 
 
 
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
           {
             path: "/updateProfile",
             element: <Update />
+          },
+          {
+            path: "/updateImage",
+            element: <UpdateImage />
           },
         ]
       },

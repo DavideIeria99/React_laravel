@@ -50,6 +50,7 @@ export default function Comment({ slug }) {
             })
     };
 
+    console.log(message);
     return (
         <>
             {
@@ -57,7 +58,7 @@ export default function Comment({ slug }) {
                     <div className="row overflow-auto w-100  " >
                         {
                             message && message.map((text) => (
-                                <Message key={text.id} message={text} />
+                                <Message key={text.id} message={text} image={api_urls.image} />
                             ))
                         }
                     </div>

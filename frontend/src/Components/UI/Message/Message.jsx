@@ -4,7 +4,7 @@ import classes from './Message.module.css'
 
 
 
-export default function Message({ message }) {
+export default function Message({ message, image }) {
 
     const date = new Date(message.created_at).toUTCString();
 
@@ -14,7 +14,7 @@ export default function Message({ message }) {
                 {/* profilo */}
                 <div className="col-4">
                     <div className={"d-flex   " + classes.img}>
-                        <img src="https://picsum.photos/200" className="img-fluid" alt="test" />
+                        <img src={`${image}`} className="img-fluid" alt="test" />
                         <p className="fs-6 ">{message.user}</p>
                     </div>
                 </div>

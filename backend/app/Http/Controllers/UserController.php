@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Str;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -28,11 +30,13 @@ class UserController extends Controller
         }
 
         $responseMessage = "user profile";
+        $image = Storage::get($user->img);
 
         return response()->json([
             'success' => true,
             'message' => $responseMessage,
-            'data' => $user
+            'data' => $user,
+            'image' => $image
         ], 200);
     }
 
@@ -50,8 +54,10 @@ class UserController extends Controller
             'user_id' => $request->user_id,
             'message' => $request->message,
             'game' => $request->game,
-
         ]);
+
+
+
         if (!$comment) {
             $responseMessage = "no comment is";
 
@@ -88,7 +94,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password
+            // 'password' => $request->password
         ]);
 
         $responseMessage = "profile update";
@@ -96,7 +102,66 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'message' => $responseMessage,
-            'data' => $user
+            'data' => $user,
         ], 200);
     }
+
+    public function updateImage(UserRequest $request, User $user)
+    {
+        $user = Auth::guard('api')->user(); //devo essere autenticato
+
+        if (!$user) {
+            $responseMessage = "Invalid Bearer Token";
+
+            return response()->json([
+                "sussess" => false,
+                "message" => $responseMessage,
+                "error" => $responseMessage
+            ], 403); //Forbidden
+        }
+
+        if ($request->has("img")) {
+            $path = public_path('storage/media');
+            if (File::exists($path . $user->img)) {
+                File::delete($path . $user->img);
+            }
+
+            $user_image = $request->file('img');
+            $user_image_name = time() . '_' . 'user' . '_' . $user_image->getClientOriginalName();
+            $user_image->storeAs('media/', $user_image_name, 'public');
+            $user->update([
+                'img' => $user_image_name
+            ]);
+        }
+
+        $responseMessage = "image update";
+
+        return response()->json([
+            'success' => true,
+            'message' => $responseMessage,
+            'data' => $user_image_name
+        ], 200);
+    }
+
+    // Save Image in Storage folder
+    // $storage->put($request->img, file_get_contents($request->img));
+
+
+
 }
+
+    // public function updateUserProfile(User $user, Request $request)
+    // {
+    //     if ($request->has("user_image")) {
+    //         $path = public_path('storage/images/users/');
+    //         if (File::exists($path . $user->profile_image)) {
+    //             File::delete($path . $user->profile_image);
+    //         }
+    //         $user_image = $request->file('user_image');
+    //         $user_image_name = time() . '_' . 'user' . '_' . $user_image->getClientOriginalName();
+    //         $user_image->storeAs('images/users/', $user_image_name, 'public');
+    //         $user->update([
+    //             'profile_image' => $user_image_name
+    //         ]);
+    //     }
+    // }

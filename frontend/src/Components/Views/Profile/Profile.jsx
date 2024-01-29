@@ -14,8 +14,10 @@ export default function Profile() {
     const [comment, setComment] = useState('');
     const [profile, setProfile] = useState('');
 
-    //comment
     useEffect(() => {
+        //profile
+        profileDetails();
+        //comment
         fetch(`${api_urls.backend}/api/users/comment`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -23,12 +25,11 @@ export default function Profile() {
             .then((r) => r.json())
             .then((r) => {
                 setComment(r.data.filter((comment) => comment.user_id == user.id))
-            })
+            });
     }, []);
 
-    //profile
-    useEffect(() => {
-        fetch(`${api_urls.backend}/api/users/view-profile`, {
+    const profileDetails = async () => {
+        await fetch(`${api_urls.backend}/api/users/view-profile`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${user.token}`,
@@ -38,8 +39,13 @@ export default function Profile() {
             .then((data) => {
                 setProfile(data.data);
             });
-    }, []);
+    }
 
+    // useEffect(() => {
+
+    // }, []);
+
+    console.log(profile);
 
     return (
         <div className="container mt-5 min-vh-100">
@@ -49,7 +55,7 @@ export default function Profile() {
                     <div className="row">
                         <div className="col-6">
                             <div >
-                                <img src="https://picsum.photos/200" className="img-fluid border border-info p-3 m-3" alt="test" />
+                                <img width={300} src={`${api_urls.backend + "/storage/media/" + profile.img}` ?? `${api_urls.image}`} className="img-fluid border border-info p-3 m-3 h-10" alt="test" />
                             </div>
                         </div>
                         <div className="col-6">
@@ -59,6 +65,9 @@ export default function Profile() {
                                 <h2>N°commenti:<span className="fs-4 ms-5 text-white">{comment.length}</span></h2>
                                 <Link className="btn btn-info" to='/updateProfile'>
                                     modifica
+                                </Link>
+                                <Link className="btn btn-info ms-2" to='/updateImage'>
+                                    modifica imagine
                                 </Link>
                             </div>
 
@@ -88,3 +97,6 @@ export default function Profile() {
         </div>
     )
 }
+
+
+

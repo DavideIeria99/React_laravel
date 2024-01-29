@@ -33,4 +33,5 @@ Route::group(['prefix' => 'users', 'middleware' => 'CORS'], function ($router) {
 
     //CRUD
     Route::put('/updateProfile', [UserController::class, 'updateProfile'])->name('update.profile');
+    Route::put('/updateImage', [UserController::class, 'updateImage'])->name('update.image');
 });
