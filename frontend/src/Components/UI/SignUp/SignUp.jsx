@@ -1,7 +1,7 @@
 import useInput from "../../../Hooks/useInput";
 import { ConfigContext } from "../../../Context/Config/Index";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AutContext } from "../../../Context/Auth";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ export default function SignUp() {
     const navigate = useNavigate();
     let { login } = useContext(AutContext);
     let { api_urls } = useContext(ConfigContext);
+    const [error, setError] = useState('')
 
     const username = useInput("");
     const email = useInput("");
@@ -20,30 +21,20 @@ export default function SignUp() {
 
     const signIn = (event) => {
         event.preventDefault();
-        if (password.value == passwordConfirm.value) {
-            //prosegui
 
-            //fetch=> register
-            //fetch=> login
-            //fetch=> view-profile
-            fetch(`${api_urls.backend}/api/users/register`, {
-                method: "POST",
-                headers: { "content-type": "application/json" },
-                body: JSON.stringify({
-                    name: username.value,
-                    email: email.value,
-                    password: password.value,
-                    password_confirmation: passwordConfirm.value
-                })
+
+        fetch(`${api_urls.backend}/api/users/register`, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+                name: username.value,
+                email: email.value,
+                password: password.value,
+                password_confirmation: passwordConfirm.value
             })
-                .then((r) => {
-                    if (r.ok) {
-                        return r.json()
-                    } else {
-                        alert("ops...");
-                    }
-                })
-                .then(() => {
+        })
+            .then((r) => {
+                if (r.ok) {
                     fetch(`${api_urls.backend}/api/users/login`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
@@ -68,14 +59,19 @@ export default function SignUp() {
                                     navigate("/");
                                 });
                         });
+                } else {
+                    r.json().then(
+                        (data) => {
+                            // console.log(data);
+                            setError(data.message)
+                        }
+                    )
+                }
+            });
 
-                })
-        } else {
-            alert('le password non coincidono');
-        }
     };
 
-
+    console.log(error);
 
     return (
         <form onSubmit={signIn} className='Sign-form'>
@@ -93,6 +89,7 @@ export default function SignUp() {
                     name="name"
                     id="userName"
                     {...username} />
+                <span className="text-danger">{error.name}</span>
             </div>
             <div className='mb-5'>
                 <label className='form-label' htmlFor="userMail" >
@@ -100,6 +97,8 @@ export default function SignUp() {
                 </label>
                 <input className=' text-white form-control bg-transparent border-0 border-bottom border-info rounded-0' placeholder='inserisci la tua email' type="email" name="email" id="userMail" {...email}
                 />
+                <span className="text-danger">{error.email}</span>
+
             </div>
             <div className='mb-5'>
                 <label className='form-label' htmlFor="userPassword" >
@@ -112,6 +111,15 @@ export default function SignUp() {
                     id="userPassword"
                     {...password} />
             </div>
+            <div className="row">
+                {
+                    error.password && error.password.map((error) => {
+                        <span className="text-danger ms-1 col-12">{error}</span>
+                    })
+                }
+
+            </div>
+
             <div className='mb-5'>
                 <label className='form-label' htmlFor="userConfirmPassword" >
                     Confirm Password
@@ -122,6 +130,8 @@ export default function SignUp() {
                     name="confirm_password"
                     id="userConfirmPassword"
                     {...passwordConfirm} />
+                <span className="text-danger">{error.password}</span>
+
             </div>
             <div className="mb-5">
                 <button type="submit" className='btn btn-outline-info px-5 rounded-0'>Register now!</button>

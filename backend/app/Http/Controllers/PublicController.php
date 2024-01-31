@@ -14,7 +14,7 @@ class PublicController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
+            'name' => 'required|string|min:3',
             'email' => 'required|string|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
