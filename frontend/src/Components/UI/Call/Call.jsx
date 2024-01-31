@@ -1,5 +1,6 @@
 import classes from './Call.module.css'
 import Video from './../../../assets/Video/video_2.mp4'
+import { Link } from 'react-router-dom'
 
 export default function Call() {
     return (
@@ -14,7 +15,11 @@ export default function Call() {
                 <div className='wrapper h-100'>
                     <div className="row h-100 justify-content-center align-items-end pb-5">
                         <div className={'col-12 text-center ' + classes.links}>
-                            <button className='btn btn-info'>Explore now</button>
+                            <Link to="/search/action/1">
+                                <button type='submit' className='btn btn-info'>
+                                    Explore now
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

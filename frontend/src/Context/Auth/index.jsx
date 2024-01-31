@@ -24,6 +24,7 @@ export default function AuthProvider(props) {
         //li scrive nel localStorage
         localStorage.setItem('user', JSON.stringify(obj));
     };
+    //aggiorna i parametri
     const Update = (username, token, id) => {
         const obj = {
             username: username,
@@ -36,7 +37,7 @@ export default function AuthProvider(props) {
         localStorage.setItem('user', JSON.stringify(obj));
     };
 
-
+    //logout
     const logout = () => {
         fetch(`${api_urls.backend}/api/users/logout`, {
             method: "POST",

@@ -17,7 +17,7 @@ export default function Navbar() {
 
                 <a className="text-decoration-none font-fira text-main" href="/">
                     <i className='fa-brands fa-react me-3'></i>
-                    Reacthor
+                    PlayLibrary
                 </a>
 
                 <div className={classes.navlogo}></div>
@@ -25,7 +25,7 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+                            <Link className="nav-link " aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/search/action/1">Search</Link>

@@ -17,15 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::group(['prefix' => 'users', 'middleware' => 'CORS'], function ($router) {
     //pubbliche
     Route::post('/register', [PublicController::class, 'register'])->name('register.user');
     Route::post('/login', [PublicController::class, 'login'])->name('login.user');
     Route::get('/count', [UserController::class, 'countUsers'])->name('count.user');
-
     //comment
     Route::post('/comment/send', [UserController::class, 'commentSend'])->name('send.user');
     Route::get('/comment', [PublicController::class, 'commentUsers'])->name('comment.user');
+    Route::get('/comment/{id}', [PublicController::class, 'commentUpdate'])->name('comment.update');
+    Route::put('/comment/update', [PublicController::class, 'commentUpdateSend'])->name('comment.updatesend');
+    Route::delete('/comment/delete/{id}', [UserController::class, 'deleteComment'])->name('delete.comment');
 
     //privata
     Route::post('/view-profile', [UserController::class, 'viewProfile'])->name('profile.user');

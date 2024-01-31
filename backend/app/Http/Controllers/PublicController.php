@@ -132,4 +132,79 @@ class PublicController extends Controller
             'data' => $comment,
         ], 200);
     }
+
+    //funzione per ricevere quel commento da modificare
+    public function commentUpdate($id)
+    {
+        $user = Auth::guard('api')->user(); //devo essere autenticato
+
+        if (!$user) {
+            $responseMessage = "Invalid Bearer Token";
+
+            return response()->json([
+                "sussess" => false,
+                "message" => $responseMessage,
+                "error" => $responseMessage
+            ], 403); //Forbidden
+        }
+        $comment = Comment::where('id', $id)->first();
+        $responseMessage = "comment send";
+
+
+        //se non ce il commento 
+        if (!$comment) {
+            $responseMessage = "comment is null";
+            return response()->json([
+                "sussess" => false,
+                "message" => $responseMessage,
+                "error" => $responseMessage
+            ], 403); //Forbidden
+        }
+
+
+        return response()->json([
+            'success' => true,
+            'messagge' => $responseMessage,
+            'data' => $comment
+        ], 200);
+    }
+
+    public function commentUpdateSend(Request $request)
+    {
+        $user = Auth::guard('api')->user(); //devo essere autenticato
+
+        if (!$user) {
+            $responseMessage = "Invalid Bearer Token";
+
+            return response()->json([
+                "sussess" => false,
+                "message" => $responseMessage,
+                "error" => $responseMessage
+            ], 403); //Forbidden
+        }
+
+        $comment = Comment::where('id', $request->id)->first();
+
+        //se non ce il commento 
+        if (!$comment) {
+            $responseMessage = "comment is undefined";
+            return response()->json([
+                "sussess" => false,
+                "message" => $responseMessage,
+                "error" => $responseMessage
+            ], 403); //Forbidden
+        }
+
+        $comment->update([
+            'id' => $request->id,
+            'message' => $request->message,
+        ]);
+        $responseMessage = "comment is update";
+
+        return response()->json([
+            "sussess" => true,
+            "message" => $responseMessage,
+            "data" => $comment
+        ], 200);
+    }
 }

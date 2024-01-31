@@ -60,10 +60,10 @@ export default function Search() {
                             <div className="input-group mb-3">
                                 <input type="text" className='form-control bg-transparent border-0 border-bottom border-info  text-white'
                                     onChange={(ev) => setSearched(ev.target.value)}
-                                    placeholder="scrivi..." />
-                                <button className='btn border-0' type='button'
+                                    placeholder="search..." />
+                                <button className='btn btn-outline-info border-0 border-bottom border-info' type='button'
                                     value={searched}>
-                                    <i className="fa-solid fa-chevron-right text-main"></i>
+                                    search
                                 </button>
                             </div>
                         </div>
@@ -71,11 +71,12 @@ export default function Search() {
                     {/* paginate */}
                     {
                         !searched &&
-                        <div className="row justify-content-between mb-5">
+
+                        <div className="row  Page  justify-content-evenly mb-5">
                             <div className="col-2">
                                 {
                                     num > 1 ? (
-                                        <Link to={`/search/${genre}/${+num - 1}`}>
+                                        <Link className='btn btn-info' to={`/search/${genre}/${+num - 1}`}>
                                             <i className="fa-solid fa-chevron-left"></i>
                                         </Link>
                                     ) : (
@@ -83,16 +84,19 @@ export default function Search() {
                                     )
                                 }
                             </div>
-                            <div className="col-2">
-                                {num}
+                            <div className="col-2 page-item ">
+                                <span className='btn btn-info'>
+                                    {num}
+                                </span>
                             </div>
                             <div className="col-2">
-                                <Link to={`/search/${genre}/${+num + 1}`}>
+                                <Link className='btn btn-info' to={`/search/${genre}/${+num + 1}`}>
                                     <i className="fa-solid fa-chevron-right"></i>
                                 </Link>
                             </div>
-
                         </div>
+
+
                     }
 
                     {/* Games */}

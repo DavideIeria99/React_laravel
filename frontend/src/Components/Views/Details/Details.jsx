@@ -71,12 +71,6 @@ export default function Details() {
                                             {detail.released
                                             }</p>
                                     </div>
-                                    <div className="col">
-                                        <h5>PLAYTIME</h5>
-                                        <p className="ms-3">
-                                            <i className="fa-solid fa-chevron-right me-2"></i>
-                                            2h</p>
-                                    </div>
                                 </div>
 
                             </div>

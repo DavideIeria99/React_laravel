@@ -1,14 +1,3 @@
-.img {
-}
-
-.img > img {
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
-	border: 1px solid cyan;
-	padding: 3px;
-}
-
 .comment {
 	font-size: 100%;
 }

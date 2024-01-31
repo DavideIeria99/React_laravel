@@ -1,7 +1,5 @@
-sistemare il profilo:
+mettere le validazioni
 
-- provare a inserire la possibilità di inserire un'immagine come sfondo;
-- cancallare i commenti che si sono creati
-
-vedere la modalità mobile;
-inserire passport;
+mobile:
+mettere un burgher per i link;
+sistemare il profile;

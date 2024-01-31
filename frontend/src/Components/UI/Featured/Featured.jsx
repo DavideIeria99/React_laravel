@@ -10,6 +10,7 @@ export default function Featured() {
 
 
 
+
     useEffect(() => {
         fetch(`${api_urls.games}games?dates=2023-01-01,2023-12-31&ordering=-added&key=${api_secrets.games}`)
             .then((r) => r.json())

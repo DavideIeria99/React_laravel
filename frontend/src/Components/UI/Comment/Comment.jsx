@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { AutContext } from "../../../Context/Auth";
 import { ConfigContext } from "../../../Context/Config/Index";
 import Message from "../Message/Message";
+
 
 
 
@@ -26,7 +28,6 @@ export default function Comment({ slug }) {
             .then((r) => r.json())
             .then((r) => {
                 setMessage(r.data.filter((comment) => comment.game == slug))
-
             })
     }
 
@@ -55,15 +56,15 @@ export default function Comment({ slug }) {
         <>
             {
                 message.length >= 1 ? (
-                    <div className="row overflow-auto w-100  " >
+                    <div className="row overflow-auto w-100 " >
                         {
                             message && message.map((text) => (
-                                <Message key={text.id} message={text} image={api_urls.image} />
+                                <Message key={text.id} message={text} />
                             ))
                         }
                     </div>
                 ) : (
-                    <p>sii il primo a commentare!!</p>
+                    <p>Be the first to comment!!</p>
                 )
             }
             {user ?
@@ -88,7 +89,7 @@ export default function Comment({ slug }) {
                 </form>
                 :
                 (
-                    <p>per commentare iscriviti!!</p>
+                    <p>sign up to comment!!</p>
                 )}
         </>
     )
