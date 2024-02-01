@@ -198,6 +198,7 @@ class PublicController extends Controller
         $comment->update([
             'id' => $request->id,
             'message' => $request->message,
+            'user' => $request->user
         ]);
         $responseMessage = "comment is update";
 

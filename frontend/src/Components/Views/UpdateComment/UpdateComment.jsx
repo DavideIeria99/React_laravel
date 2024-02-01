@@ -36,7 +36,9 @@ export default function UpdateComment() {
             },
             body: JSON.stringify({
                 'id': comment.id,
-                'message': message
+                'message': message,
+                'user': user.username
+
             }),
         }).then(
 
@@ -44,6 +46,7 @@ export default function UpdateComment() {
         )
     }
 
+    console.log(comment);
     return (
         <div className="container mt-5">
             <TitleName title='Update Comment' />
