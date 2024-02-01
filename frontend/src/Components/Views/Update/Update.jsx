@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { ConfigContext } from "../../../Context/Config/Index";
 import { AutContext } from "../../../Context/Auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Update() {
@@ -34,8 +34,8 @@ export default function Update() {
 
     return (
         <div className="container mt-5">
-            <div className="row py-5 ">
-                <div className="col-5 mx-auto">
+            <div className="row py-5 min-vh-100 align-content-center ">
+                <div className="col-12 col-md-5 mx-auto">
                     <form onSubmit={UpProfile} encType="multipart/form-data" className='Sign-form'>
                         <h1 className="text-center"> update</h1>
                         <div className='Sign-top'></div>
@@ -45,7 +45,7 @@ export default function Update() {
                                 name
                             </label>
                             <input className='form-control bg-transparent border-0 border-bottom border-info rounded-0 text-white'
-                                placeholder='inserisci il tuo nome'
+                                placeholder='update your name'
                                 type="text"
                                 name="user"
                                 id="user"
@@ -58,7 +58,7 @@ export default function Update() {
                                 email
                             </label>
                             <input className='form-control bg-transparent border-0 border-bottom border-info rounded-0 text-white'
-                                placeholder='inserisci la tua email'
+                                placeholder='update your email'
                                 type="email"
                                 name="email"
                                 id="userMail"
@@ -67,8 +67,14 @@ export default function Update() {
                                 }} />
                         </div>
 
-                        <div className="mb-5">
+                        <div className="mb-5 d-flex justify-content-around">
                             <button type="submit" className='btn btn-outline-info px-5 rounded-0'>Update</button>
+                            <Link to='/profile'>
+                                <button type="submit" className='btn btn-outline-info px-5 rounded-0'>back end</button>
+                            </Link>
+                        </div>
+                        <div className="mb-5 ">
+                            <p>update image the your profile <Link to='/updateimage'>check in</Link></p>
                         </div>
                     </form>
 

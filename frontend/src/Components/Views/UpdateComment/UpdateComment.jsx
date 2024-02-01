@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AutContext } from '../../../Context/Auth';
 import { ConfigContext } from '../../../Context/Config/Index';
+import TitleName from '../../../utilities/TitleName';
 
 export default function UpdateComment() {
     const navigate = useNavigate();
@@ -45,6 +46,8 @@ export default function UpdateComment() {
 
     return (
         <div className="container mt-5">
+            <TitleName title='Update Comment' />
+
             {
                 comment && (
                     <div className="row py-5 " key={1}>

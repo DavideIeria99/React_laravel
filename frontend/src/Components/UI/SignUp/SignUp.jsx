@@ -4,6 +4,7 @@ import { ConfigContext } from "../../../Context/Config/Index";
 import { useContext, useState } from "react";
 import { AutContext } from "../../../Context/Auth";
 import { useNavigate } from "react-router-dom";
+import TitleName from "../../../utilities/TitleName";
 
 
 export default function SignUp() {
@@ -71,11 +72,11 @@ export default function SignUp() {
 
     };
 
-    console.log(error);
 
     return (
         <form onSubmit={signIn} className='Sign-form'>
             <h1 className="text-center"> Register</h1>
+            <TitleName title='signUp' />
 
             <div className='Sign-top'></div>
             <div className='Sign-bottom'></div>
@@ -114,7 +115,7 @@ export default function SignUp() {
             <div className="row">
                 {
                     error.password && error.password.map((error) => {
-                        <span className="text-danger ms-1 col-12">{error}</span>
+                        <span key={_} className="text-danger ms-1 col-12">{error}</span>
                     })
                 }
 

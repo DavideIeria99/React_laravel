@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 import { ConfigContext } from "../../../Context/Config/Index";
 import Comment from "../../UI/Comment/Comment";
+import TitleName from "../../../utilities/TitleName";
 
 export default function Details() {
     const { slug } = useParams();
@@ -26,6 +27,7 @@ export default function Details() {
                     backgroundAttachment: "fixed"
 
                 }}>
+                    <TitleName title={detail.name} />
                     <div className="container">
                         <div className="row mt-5">
                             <div className="col-12">

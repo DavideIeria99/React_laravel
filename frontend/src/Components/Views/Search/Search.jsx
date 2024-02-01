@@ -6,6 +6,7 @@ import GenreList from '../../UI/GenreList/GenreList';
 import Card from '../../UI/Card/Card';
 import { Link, useParams } from 'react-router-dom';
 import Loader from '../../UI/Loader/Loader';
+import TitleName from '../../../utilities/TitleName';
 
 
 export default function Search() {
@@ -46,6 +47,7 @@ export default function Search() {
     }, [searched])
     return (
         <div className={"container-fluid min-vh-100 py-5 my-5 " + classes["bg-info"]}>
+            <TitleName title='search' />
             <div className="row my-5 ">
                 {/* lista generi */}
                 <div className="col-12 col-md-3 col-lg-2">
@@ -56,7 +58,7 @@ export default function Search() {
                 {/* lista giochi */}
                 <div className="col-12 col-md-9 col-lg-10">
                     <div className="row">
-                        <div className="col-12 col-md-6 col-lg-3">
+                        <div className="col-12 col-md-6 col-lg-3 my-5">
                             <div className="input-group mb-3">
                                 <input type="text" className='form-control bg-transparent border-0 border-bottom border-info  text-white'
                                     onChange={(ev) => setSearched(ev.target.value)}
@@ -100,11 +102,11 @@ export default function Search() {
                     }
 
                     {/* Games */}
-                    <div className="row">
+                    <div className="row justify-c">
                         {
                             games ? games.map((game) => {
                                 return (
-                                    <div key={game.id} className='col-12 col-md-6 col-lg-4 mb-5'>
+                                    <div key={game.id} className='col-12 d-flex justify-content-center justify-content-md-center col-md-6 col-lg-4 mb-5'>
                                         <Card image={game.background_image} name={game.name} slug={game.slug} />
                                     </div>
 

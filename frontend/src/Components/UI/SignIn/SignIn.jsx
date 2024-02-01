@@ -4,6 +4,7 @@ import { ConfigContext } from "../../../Context/Config/Index";
 import { useContext, useState } from "react";
 import { AutContext } from "../../../Context/Auth";
 import { useNavigate } from "react-router-dom";
+import TitleName from "../../../utilities/TitleName";
 
 export default function SignIn() {
 
@@ -55,6 +56,7 @@ export default function SignIn() {
 
 
         <form onSubmit={signUp} className='Sign-form'>
+            <TitleName title='signIn' />
             <h1 className="text-center"> Login</h1>
             <div className='Sign-top'></div>
             <div className='Sign-bottom'></div>

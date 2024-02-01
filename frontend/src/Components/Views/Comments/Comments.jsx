@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AutContext } from "../../../Context/Auth";
 import { ConfigContext } from "../../../Context/Config/Index";
 import { useContext, useEffect, useState } from "react";
+import TitleName from "../../../utilities/TitleName";
 
 export default function Comments() {
     const { user } = useContext(AutContext);
     const { api_urls } = useContext(ConfigContext);
     const [comment, setComment] = useState('');
-    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -47,6 +47,7 @@ export default function Comments() {
     return (
         <>
             <div className="container-fluid mt-5 min-vh-100">
+                <TitleName title='comments' />
                 <div className="row  pt-5">
                     <div className="col-12">
                         <h1>Views your comments</h1>

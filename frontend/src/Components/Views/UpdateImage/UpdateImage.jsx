@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import { ConfigContext } from "../../../Context/Config/Index";
 import { AutContext } from "../../../Context/Auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import TitleName from "../../../utilities/TitleName";
 
 export default function Update() {
 
@@ -33,11 +34,13 @@ export default function Update() {
     }
 
     return (
-        <div className="container mt-5">
-            <div className="row py-5 ">
-                <div className="col-5 mx-auto">
+        <div className="container">
+            <TitleName title='update image' />
+
+            <div className="row  min-vh-100  align-content-center">
+                <div className="col-12 col-md-5 mx-auto ">
                     <form onSubmit={UpImage} encType="multipart/form-data" className='Sign-form'>
-                        <h1 className="text-center"> update</h1>
+                        <h1 className="text-center"> update Image</h1>
                         <div className='Sign-top'></div>
                         <div className='Sign-bottom'></div>
                         <div className='mb-5'>
@@ -45,13 +48,19 @@ export default function Update() {
                                 img
                             </label>
                             <input className='form-control bg-transparent border-0 border-bottom border-info rounded-0 text-white'
-                                placeholder='inserisci la tua img' type="file" accept="image/*" name="img"
+                                placeholder='inserisci la tua img' type="file" accept="image/*" name="img" lang="en-GB"
                                 id="img" onChange={(e) => {
                                     setImg(e.target.files[0]);
                                 }} />
                         </div>
-                        <div className="mb-5">
+                        <div className="mb-5 d-flex justify-content-around">
                             <button type="submit" className='btn btn-outline-info px-5 rounded-0'>Update</button>
+                            <Link to='/profile'>
+                                <button type="submit" className='btn btn-outline-info px-5 rounded-0'>back end</button>
+                            </Link>
+                        </div>
+                        <div className="mb-5 ">
+                            <span>update profile the your profile <Link to='/update'>check in</Link></span>
                         </div>
                     </form>
 

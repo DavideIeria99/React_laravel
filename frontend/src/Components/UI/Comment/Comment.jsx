@@ -51,7 +51,7 @@ export default function Comment({ slug }) {
             })
     };
 
-    console.log(message);
+
     return (
         <>
             {

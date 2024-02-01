@@ -23,11 +23,11 @@ export default function Featured() {
 
     return (
         <div className="container-fluid">
-            <div className="row">
+            <div className="row j ">
                 {
                     data && data.map(el => {
                         return (
-                            <div key={el.id} className="col-12 col-md-6 col-lg-3" >
+                            <div key={el.id} className="col-12 d-flex my-1 justify-content-center align-content-center justify-content-md-start col-md-6 col-lg-3" >
                                 <Card image={el.background_image} name={el.name} slug={el.slug} />
                             </div>
                         )
