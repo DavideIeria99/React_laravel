@@ -23,8 +23,6 @@ const Overlay = (props) => {
                 <button className="btn btn-outline-info rounded-0 px-3" onClick={props.action}>
                     {props.ConfirmMessage}
                 </button>
-
-
             </div>
         </div>
     )
